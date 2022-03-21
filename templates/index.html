@@ -21,6 +21,12 @@
         <span class="header__bookmark-counter">3</span>
       </a>
     </div>
+    <div class="item__post-bottom">
+          <a href="/search" class="item__btn-more">ПOИСК ПО ПОСТАМ</a>
+          <button type="button" class="item__bookmark-btn">
+            <img src="../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
+          </button>
+    </div>
   </header>
 
   <main class="container">
@@ -29,14 +35,14 @@
 
       <div class="items__item item">
         <div class="item__top">
-          <a href="/user-feed" class="item__head">
+          <a href="/users/{{post.poster_name}}" class="item__head">
             <div class="item__ava-wrap">
               <img src="{{post.poster_avatar}}"  alt="" class="item__ava" width="47">
             </div>
             <span class="item__username">{{post.poster_name}}</span>
           </a>
         </div>
-        <a href="/post" class="item__post-link">
+        <a href="/post/{{post.pk}}" class="item__post-link">
           <img src="{{post.pic}}" alt="" width="348" class="item__post-img">
         </a>
         <p class="item__descr">{{post.content[0:50] + "..."}}</p>
@@ -47,7 +53,7 @@
           </div>
         </div>
         <div class="item__post-bottom">
-          <a href="GET/post/{{post.pk}}" class="item__btn-more">Подробнее</a>
+          <a href="/post/{{post.pk}}" class="item__btn-more">Подробнее</a>
           <button type="button" class="item__bookmark-btn">
             <img src="../static/img/bookmark.png" alt="" class="item__bookmark-icon" width="24">
           </button>

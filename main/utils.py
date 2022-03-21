@@ -32,11 +32,10 @@ def get_posts_by_user(user_name):
     posts = get_posts_all()
 
     for post in posts:
-        if user_name.lower() == post.get("user_name").lower():
-            user_posts.append(post.get("user_name"))
-        else:
-            return "Пользователь не найден"
-        return user_posts
+        if post["poster_name"] == user_name:
+            user_posts.append(post)
+
+    return user_posts
 
 
 def get_comments_by_post_id(post_id):
@@ -64,23 +63,10 @@ def search_for_posts(query):
     query_posts = []
     posts = get_posts_all()
     for post in posts:
-        if query.lower() in post["content"].lower():
+        if query.lower() in post["content"]:
             query_posts.append(post)
     return query_posts
 
-
-def get_post_by_pk(pk):
-    """
-    Возвращает один пост по его идентификатору
-    :param pk:
-    :return: post
-    """
-    posts = get_posts_all()
-    for post in posts:
-        if pk == post["pk"]:
-            return post
-        else:
-            return "Публикаций не найдено"
 
 
 def get_post_by_postid(post_id):

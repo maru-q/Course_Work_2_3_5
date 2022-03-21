@@ -1,18 +1,17 @@
 from flask import Blueprint, render_template, request
-from utils import get_posts_all, get_posts_by_user, get_post_by_postid, get_comments_by_post_id, get_post_by_pk, search_for_posts
+from main.utils import get_posts_all, get_posts_by_user, get_post_by_postid, get_comments_by_post_id, search_for_posts
 
 main_blueprint = Blueprint("main_blueprint", __name__, template_folder="templates")
 
 
-@main_blueprint.route("/GET")
+@main_blueprint.route("/")
 def main_page():
     posts = get_posts_all()
     return render_template("index.html", posts=posts)
 
 
-@main_blueprint.route("/GET/post/<int:postid>")
+@main_blueprint.route("/post/<int:postid>")
 def post_page(postid):
-
     post = get_post_by_postid(postid)
 
     if not post:
@@ -36,4 +35,8 @@ def search_page():
 @main_blueprint.route("/users/<username>")
 def post_by_user_page(username):
     posts = get_posts_by_user(username)
-    return render_template("user-feed.html", posts=posts)
+    if not posts:
+        return "Пост не найден"
+    return render_template("user-feed.html", posts=posts, username=username)
+
+
